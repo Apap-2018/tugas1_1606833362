@@ -26,16 +26,19 @@
         <td th:text="${jumlahPegawai}"></td>
     </tr>
 </table>
+<div class="btn-group">
 <hr>
 <form th:action="@{'/jabatan/ubah'}" >
     <input type="hidden" name="idJabatan" th:value="${jabatan.id}" />
     <button value="submit" class="btn" style="align-content: center">Ubah</button>
 </form>
-<hr>
+</div>
+<div class="btn-group">
 <form th:action="@{'/jabatan/hapus'}" th:method="POST" >
     <input type="hidden" name="id" th:value="${jabatan.id}" />
-    <button value="submit" class="btn btn-danger">Hapus</button>
+    <button value="submit" class="btn btn">Hapus</button>
 </form>
 <hr>
+</div>
 </body>
 </html>
