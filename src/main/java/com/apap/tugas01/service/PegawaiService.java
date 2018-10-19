@@ -1,8 +1,10 @@
 package com.apap.tugas01.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.apap.tugas01.model.InstansiModel;
+import com.apap.tugas01.model.JabatanModel;
 import com.apap.tugas01.model.PegawaiModel;
 
 public interface PegawaiService {

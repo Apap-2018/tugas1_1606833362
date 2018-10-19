@@ -60,16 +60,6 @@ public class PegawaiController {
         model.addAttribute("title", "Data Pegawai");
         return "view-pegawai";
     }
-
-    @GetMapping(value = ("/pegawai/tambah"))
-    private String addPegawaiGet(Model model){
-        return "home";
-    }
-
-    @PostMapping(value = ("pegawai/tambah"))
-    private String addPegawaiPost(ModelAttribute pegawaiModel){
-        return "home";
-    }
     
 	@RequestMapping(value = "/pegawai/termuda-tertua", method = RequestMethod.GET)
 	private String lihatPegawaiTermudaTertua(@RequestParam("idInstansi") long idInstansi, Model model) {

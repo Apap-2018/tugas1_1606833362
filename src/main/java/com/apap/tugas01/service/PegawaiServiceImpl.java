@@ -1,5 +1,6 @@
 package com.apap.tugas01.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -53,7 +54,6 @@ public class PegawaiServiceImpl implements PegawaiService{
 	@Override
 	public List<PegawaiModel> findByInstansi(InstansiModel instansi) {
 		return PegawaiDb.findByInstansi(instansi);
-	}
-	
+	}	
 
 }
