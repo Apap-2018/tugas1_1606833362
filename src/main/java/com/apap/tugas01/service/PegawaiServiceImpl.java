@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.apap.tugas01.model.InstansiModel;
 import com.apap.tugas01.model.JabatanModel;
 import com.apap.tugas01.model.PegawaiModel;
 import com.apap.tugas01.repository.PegawaiDb;
@@ -48,4 +49,11 @@ public class PegawaiServiceImpl implements PegawaiService{
         gajiLengkap += (gajiLengkap * presentaseTunjangan/100);
         return gajiLengkap;
     }
+    
+	@Override
+	public List<PegawaiModel> findByInstansi(InstansiModel instansi) {
+		return PegawaiDb.findByInstansi(instansi);
+	}
+	
+
 }

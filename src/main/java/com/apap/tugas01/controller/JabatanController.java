@@ -14,6 +14,7 @@ import com.apap.tugas01.model.JabatanPegawaiModel;
 import com.apap.tugas01.model.PegawaiModel;
 import com.apap.tugas01.service.JabatanPegawaiService;
 import com.apap.tugas01.service.JabatanService;
+import com.apap.tugas01.service.PegawaiService;
 
 @Controller
 public class JabatanController {
@@ -22,6 +23,9 @@ public class JabatanController {
     
     @Autowired
     private JabatanPegawaiService JabatanPegawaiService;
+    
+    @Autowired
+    private PegawaiService PegawaiService;
 
     @RequestMapping(value = "/jabatan/tambah", method = RequestMethod.GET)
     private String tambahJabatan(Model model){
@@ -38,7 +42,17 @@ public class JabatanController {
 
     @RequestMapping(value = "/jabatan/view", method = RequestMethod.GET)
     private String viewJabatan(@RequestParam(value="idJabatan") Long id, Model model) {
-        model.addAttribute("jabatan", JabatanService.findJabatanById(id).get());
+		JabatanModel jabatan = JabatanService.findJabatanById(id).get();
+		List<PegawaiModel> allPegawai = PegawaiService.getAllPegawai();
+		int counter = 0;
+		for(int i=0;i<allPegawai.size();i++) {
+			for(int j=0;j<allPegawai.get(i).getJabatanList().size();j++) {
+				if(allPegawai.get(i).getJabatanList().get(j)==jabatan)
+					counter++;
+			}
+		}
+		model.addAttribute("jabatan", jabatan);
+		model.addAttribute("jumlahPegawai", counter);
         return "view-jabatan";
     }
 

@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.apap.tugas01.model.JabatanModel;
 import com.apap.tugas01.model.JabatanPegawaiModel;
 import com.apap.tugas01.repository.JabatanPegawaiDb;
 @Service
@@ -27,4 +28,10 @@ public class JabatanPegawaiServiceImpl implements JabatanPegawaiService{
 	public List<JabatanPegawaiModel> findAllByJabatanId(Long id){
 		return JabatanPegawaiDb.findAllByJabatanId(id);
 	}
+	
+	@Override
+	public int countPegawaiByJabatan(JabatanModel jabatan) {
+		return 0;
+	}
+
 }

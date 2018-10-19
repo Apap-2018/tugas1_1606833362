@@ -21,11 +21,15 @@
         <td>Gaji Pokok</td>
         <td th:text="'Rp ' + ${jabatan.gajiPokok}"></td>
     </tr>
+        <tr>
+        <td>Jumlah Pegawai</td>
+        <td th:text="${jumlahPegawai}"></td>
+    </tr>
 </table>
 <hr>
 <form th:action="@{'/jabatan/ubah'}" >
     <input type="hidden" name="idJabatan" th:value="${jabatan.id}" />
-    <button value="submit" class="btn btn-primary" style="align-content: center">Ubah</button>
+    <button value="submit" class="btn" style="align-content: center">Ubah</button>
 </form>
 <hr>
 <form th:action="@{'/jabatan/hapus'}" th:method="POST" >
