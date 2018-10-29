@@ -116,7 +116,7 @@ public class PegawaiController {
 	}
 	
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.GET)
-	private String addPegawai(Model model) {
+	private String tambahPegawai(Model model) {
 		PegawaiModel pegawai = new PegawaiModel();
 		pegawai.setJabatanList(new ArrayList<JabatanModel>());
 		pegawai.getJabatanList().add(new JabatanModel());
@@ -139,10 +139,10 @@ public class PegawaiController {
 	
 	
 	@RequestMapping(value="/pegawai/tambah", params={"addRow"}, method = RequestMethod.POST)
-	public String addRow(@ModelAttribute PegawaiModel pegawai, BindingResult bindingResult, Model model) {
+	public String tambahRow(@ModelAttribute PegawaiModel pegawai, BindingResult bindingResult, Model model) {
 		pegawai.getJabatanList().add(new JabatanModel());
+		
 	    model.addAttribute("pegawai", pegawai);
-	    
 	    model.addAttribute("allProvinsi", provinsiService.viewAllProvinsi());
 		model.addAttribute("allInstansi", instansiService.getInstansiByProvinsi(pegawai.getInstansi().getProvinsi()));
 		model.addAttribute("allJabatan", jabatanService.viewAll());
@@ -151,26 +151,25 @@ public class PegawaiController {
 	
 	
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.POST, params={"deleteRow"})
-	private String deleteRow(@ModelAttribute PegawaiModel pegawai, Model model, final BindingResult bindingResult, final HttpServletRequest req) {
+	private String hapusRow(@ModelAttribute PegawaiModel pegawai, Model model, final BindingResult bindingResult, final HttpServletRequest req) {
 		Integer rowId =  Integer.valueOf(req.getParameter("deleteRow"));
 		pegawai.getJabatanList().remove(rowId.intValue());
-		model.addAttribute("pegawai", pegawai); 
 		
+		model.addAttribute("pegawai", pegawai); 
 	    model.addAttribute("allProvinsi", provinsiService.viewAllProvinsi());
 		model.addAttribute("allInstansi", instansiService.getInstansiByProvinsi(pegawai.getInstansi().getProvinsi()));
 		model.addAttribute("allJabatan", jabatanService.viewAll());
-		
 		return "tambahPegawai";
 	}
 	
 	@RequestMapping(value = "/pegawai/ubah", method = RequestMethod.GET)
 	private String ubahPegawai(@RequestParam("nip") String nip, Model model) {
 		PegawaiModel pegawai = pegawaiService.getPegawaiByNip(nip);
+		
 		model.addAttribute("pegawai", pegawai);
 		model.addAttribute("allProvinsi", provinsiService.viewAllProvinsi());
 		model.addAttribute("allInstansi", instansiService.viewAll());
 		model.addAttribute("allJabatan", jabatanService.viewAll());
-
 		return "ubahPegawai";
 	}
 	
@@ -184,20 +183,19 @@ public class PegawaiController {
 	}
 	
 	@RequestMapping(value="/pegawai/ubah", params={"addRow"}, method = RequestMethod.POST)
-	public String addRowUbah(@ModelAttribute PegawaiModel pegawai, BindingResult bindingResult, Model model) {
+	public String tambahRowUbah(@ModelAttribute PegawaiModel pegawai, BindingResult bindingResult, Model model) {
 		pegawai.getJabatanList().add(new JabatanModel());
 	    model.addAttribute("pegawai", pegawai);
 	    
 	    model.addAttribute("allProvinsi", provinsiService.viewAllProvinsi());
 		model.addAttribute("allInstansi", instansiService.getInstansiByProvinsi((pegawai.getInstansi().getProvinsi())));
 		model.addAttribute("allJabatan", jabatanService.viewAll());
-		
 	    return "ubahPegawai";
 	}
 	
 	
 	@RequestMapping(value = "/pegawai/ubah", method = RequestMethod.POST, params={"deleteRow"})
-	private String deleteRowUbah(@ModelAttribute PegawaiModel pegawai, Model model,final BindingResult bindingResult, final HttpServletRequest req) {
+	private String hapusRowUbah(@ModelAttribute PegawaiModel pegawai, Model model,final BindingResult bindingResult, final HttpServletRequest req) {
 		Integer rowId =  Integer.valueOf(req.getParameter("deleteRow"));
 		pegawai.getJabatanList().remove(rowId.intValue());
 		model.addAttribute("pegawai", pegawai); 
@@ -205,7 +203,6 @@ public class PegawaiController {
 	    model.addAttribute("allProvinsi", provinsiService.viewAllProvinsi());
 		model.addAttribute("allInstansi", instansiService.getInstansiByProvinsi((pegawai.getInstansi().getProvinsi())));
 		model.addAttribute("allJabatan", jabatanService.viewAll());
-		
 		return "ubahPegawai";
 	}
 	
