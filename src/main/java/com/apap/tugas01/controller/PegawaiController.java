@@ -206,4 +206,12 @@ public class PegawaiController {
 		return "ubahPegawai";
 	}
 	
+	@RequestMapping(value = "/pegawai/cari")
+	public String cariPegawai(Model model) {
+		List<PegawaiModel> pegawaiList = pegawaiService.getAllPegawai();
+		
+		model.addAttribute("listPegawai", pegawaiList);
+		return "cariPegawai";
+	}
+	
 }
