@@ -9,23 +9,26 @@
 <nav th:replace="fragments/fragment :: navbar"></nav>
 
 <div class="container-fluid">
+	<br>
     <h2>Tambah Jabatan</h2>
-
     <form th:action="@{/jabatan/tambah}" th:object=${jabatan} method="POST">
-        <div class="form-group">
-            <label for="input-nama">Nama</label>
-            <input id="input-nama" type="text" name="nama" class="form-control"/>
-        </div>
-        <div class="form-group">
-            <label for="input-deskripsi">Deskripsi</label>
-            <input type="text" name="deskripsi" class="form-control" id="input-deskripsi"/>
-        </div>
-        <div class="form-group">
-            <label for="input-gajiPokok">Gaji Pokok</label>
-            <input type="number" name="gajiPokok" class="form-control" id="input-gajiPokok"/>
-        </div>
+	<table>
+		<tr>
+			<td><label for="input-nama">Nama</label></td>
+			<td><input id="input-nama" type="text" name="nama" class="form-control" required="required"/></td>
+		</tr>
+		<tr>
+			<td><label for="input-deskripsi">Deskripsi</label></td>
+			<td><input type="text" name="deskripsi" class="form-control" id="input-deskripsi" required="required"/></td>
+		</tr>
+		<tr>
+			<td><label for="input-gajiPokok">Gaji Pokok</label></td>
+			<td><input type="number" name="gajiPokok" class="form-control" id="input-gajiPokok" required="required"/></td>
+		</tr>
+		</table>
+		<br>
         <button type="submit" class="btn btn-primary">Simpan</button>
-    </form>
+    </form>    
 </div>
 </body>
 </html>

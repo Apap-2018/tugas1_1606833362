@@ -30,6 +30,7 @@ public class PegawaiServiceImpl implements PegawaiService{
 
     @Override
     public void addPegawai(PegawaiModel pegawai){
+		pegawai.setNip(this.generateNIP(pegawai));
         pegawaiDb.save(pegawai);
     }
 
@@ -68,9 +69,7 @@ public class PegawaiServiceImpl implements PegawaiService{
 	public void updatePegawai(PegawaiModel pegawai) {
 		PegawaiModel oldPegawai = pegawaiDb.findByNip(pegawai.getNip());
 		
-		if(!oldPegawai.getTanggalLahir().equals(pegawai.getTanggalLahir())||
-			!oldPegawai.getTahunMasuk().equals(pegawai.getTahunMasuk())||
-			!oldPegawai.getInstansi().equals(pegawai.getInstansi())) {
+		if(!oldPegawai.getTanggalLahir().equals(pegawai.getTanggalLahir()) || !oldPegawai.getTahunMasuk().equals(pegawai.getTahunMasuk()) || !oldPegawai.getInstansi().equals(pegawai.getInstansi())) {
 			oldPegawai.setNip(this.generateNIP(pegawai));
 			pegawai.setNip(oldPegawai.getNip());
 		}
@@ -85,7 +84,7 @@ public class PegawaiServiceImpl implements PegawaiService{
 	}
 
 	@Override
-	public String generateNIP(PegawaiModel pegawai) {
+	public String generateNIP(PegawaiModel pegawai) {	
 		String nip = "";
 		nip+=pegawai.getInstansi().getId();
         
@@ -108,5 +107,4 @@ public class PegawaiServiceImpl implements PegawaiService{
         
         return nip;
 	}
-
 }
