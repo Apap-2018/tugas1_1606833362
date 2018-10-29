@@ -1,18 +1,27 @@
 package com.apap.tugas01.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "jabatan")
 public class JabatanModel implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private BigInteger id;
 
     @NotNull
     @Size(max = 255)
@@ -43,14 +52,14 @@ public class JabatanModel implements Serializable {
     public void setPegawaiList(List<PegawaiModel> pegawaiList) {
         this.pegawaiList = pegawaiList;
     }
-    
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public BigInteger getId() {
+		return id;
+	}
+
+	public void setId(BigInteger id) {
+		this.id = id;
+	}
 
     public String getNama() {
         return nama;

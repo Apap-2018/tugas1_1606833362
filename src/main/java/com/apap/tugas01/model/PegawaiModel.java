@@ -1,6 +1,7 @@
 package com.apap.tugas01.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -28,9 +29,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "pegawai")
 public class PegawaiModel implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private BigInteger id;
 
     @NotNull
     @Size(max = 255)
@@ -45,16 +47,16 @@ public class PegawaiModel implements Serializable {
     @NotNull
     @Size(max = 255)
     @Column(name = "tempat_lahir", nullable = false)
-    private String tempat_lahir;
+    private String tempatLahir;
 
     @NotNull
     @Column(name = "tanggal_lahir")
-    private Date tanggal_lahir;
+    private Date tanggalLahir;
 
     @NotNull
     @Size(max = 255)
     @Column(name = "tahun_masuk", nullable = false)
-    private String tahun_masuk;
+    private String tahunMasuk;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_instansi", referencedColumnName = "id", nullable = false)
@@ -75,13 +77,13 @@ public class PegawaiModel implements Serializable {
         this.jabatanList = jabatanList;
     }
 
-    public long getId() {
-        return id;
-    }
+	public BigInteger getId() {
+		return id;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setId(BigInteger id) {
+		this.id = id;
+	}
 
     public String getNip() {
         return nip;
@@ -100,27 +102,27 @@ public class PegawaiModel implements Serializable {
     }
 
     public String getTempatLahir() {
-        return tempat_lahir;
+        return tempatLahir;
     }
 
     public void setTempatLahir(String tempat_lahir) {
-        this.tempat_lahir = tempat_lahir;
+        this.tempatLahir = tempat_lahir;
     }
 
     public Date getTanggalLahir() {
-        return tanggal_lahir;
+        return tanggalLahir;
     }
 
     public void setTanggalLahir(Date tanggal_lahir) {
-        this.tanggal_lahir = tanggal_lahir;
+        this.tanggalLahir = tanggal_lahir;
     }
 
     public String getTahunMasuk() {
-        return tahun_masuk;
+        return tahunMasuk;
     }
 
     public void setTahunMasuk(String tahun_masuk) {
-        this.tahun_masuk = tahun_masuk;
+        this.tahunMasuk = tahun_masuk;
     }
 
     public InstansiModel getInstansi() {
@@ -132,7 +134,7 @@ public class PegawaiModel implements Serializable {
     }
 
 	public int getUmur() {
-		LocalDate birthday = tanggal_lahir.toLocalDate();
+		LocalDate birthday = tanggalLahir.toLocalDate();
 		LocalDate now = LocalDate.now();
 		return now.getYear()-birthday.getYear();
 	}

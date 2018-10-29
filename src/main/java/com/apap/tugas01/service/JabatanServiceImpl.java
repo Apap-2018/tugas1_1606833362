@@ -1,5 +1,6 @@
 package com.apap.tugas01.service;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,30 +16,32 @@ import com.apap.tugas01.repository.JabatanDb;
 @Transactional
 public class JabatanServiceImpl implements JabatanService{
     @Autowired
-    private JabatanDb JabatanDb;
+    private JabatanDb jabatanDb;
 
-    public Optional<JabatanModel> findJabatanById(Long id){
-        return JabatanDb.findById(id);
+    public void addJabatan(JabatanModel jabatan){
+        jabatanDb.save(jabatan);
     }
 
-    public void updateJabatan(Long id, JabatanModel jabatan){
-        JabatanModel jabatanUpdated = JabatanDb.getOne(id);
+    public void deleteJabatan(JabatanModel jabatan){
+        jabatanDb.deleteById(jabatan.getId());
+    }
+
+    public List<JabatanModel> viewAll(){
+        return jabatanDb.findAll();
+    }
+
+	@Override
+	public void updateJabatan(BigInteger id, JabatanModel jabatan) {
+        JabatanModel jabatanUpdated = jabatanDb.getOne(id);
         jabatanUpdated.setDeskripsi(jabatan.getDeskripsi());
         jabatanUpdated.setGajiPokok(jabatan.getGajiPokok());
         jabatanUpdated.setId(jabatan.getId());
         jabatanUpdated.setNama(jabatan.getNama());
-        JabatanDb.save(jabatanUpdated);
+        jabatanDb.save(jabatanUpdated);
     }
 
-    public void addJabatan(JabatanModel jabatan){
-        JabatanDb.save(jabatan);
-    }
-
-    public void deleteJabatan(JabatanModel jabatan){
-        JabatanDb.deleteById(jabatan.getId());
-    }
-
-    public List<JabatanModel> viewAll(){
-        return JabatanDb.findAll();
-    }
+	@Override
+	public Optional<JabatanModel> findJabatanById(BigInteger id) {
+		return jabatanDb.findById(id);
+	}
 }

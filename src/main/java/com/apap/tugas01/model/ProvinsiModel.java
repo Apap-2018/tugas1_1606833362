@@ -1,6 +1,7 @@
 package com.apap.tugas01.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,9 +19,9 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "provinsi")
 public class ProvinsiModel implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private BigInteger id;
 
     @NotNull
     @Size(max = 255)
@@ -35,13 +36,13 @@ public class ProvinsiModel implements Serializable {
     private List<InstansiModel> instansiList;
 
 
-    public long getId() {
-        return id;
-    }
+	public BigInteger getId() {
+		return id;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setId(BigInteger id) {
+		this.id = id;
+	}
 
     public String getNama() {
         return nama;

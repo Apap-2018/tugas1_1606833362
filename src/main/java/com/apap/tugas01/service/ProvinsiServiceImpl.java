@@ -1,5 +1,6 @@
 package com.apap.tugas01.service;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,15 +16,15 @@ import com.apap.tugas01.repository.ProvinsiDb;
 @Transactional
 public class ProvinsiServiceImpl implements ProvinsiService {
 	@Autowired
-	private ProvinsiDb provinsi;
+	private ProvinsiDb provinsiDb;
 
 	@Override
-	public Optional<ProvinsiModel> findProvinsiDetailById(long id) {
-		return provinsi.findById(id);
+	public Optional<ProvinsiModel> findProvinsiById(BigInteger id) {
+		return provinsiDb.findById(id);
 	}
 
 	@Override
 	public List<ProvinsiModel> viewAllProvinsi() {
-		return provinsi.findAll();
+		return provinsiDb.findAll();
 	}
 }

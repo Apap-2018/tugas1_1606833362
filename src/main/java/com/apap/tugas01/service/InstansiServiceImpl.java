@@ -1,6 +1,8 @@
 package com.apap.tugas01.service;
 
+import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -17,11 +19,6 @@ public class InstansiServiceImpl implements InstansiService{
 	private InstansiDb instansiDb;
 
 	@Override
-	public InstansiModel findInstansiById(Long id) {
-		return instansiDb.findById(id).get();
-	}
-
-	@Override
 	public List<InstansiModel> viewAll() {
 		return instansiDb.findAll();
 	}
@@ -29,5 +26,15 @@ public class InstansiServiceImpl implements InstansiService{
 	@Override
 	public List<InstansiModel> getInstansiByProvinsi(ProvinsiModel provinsi) {
 		return instansiDb.findByProvinsi(provinsi);
+	}
+
+	@Override
+	public Optional<InstansiModel> findInstansiById(BigInteger id) {
+		return instansiDb.findById(id);
+	}
+
+	@Override
+	public List<InstansiModel> getByNama(String nama) {
+		return instansiDb.findByNama(nama);
 	}
 }

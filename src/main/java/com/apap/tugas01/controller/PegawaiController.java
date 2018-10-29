@@ -1,13 +1,11 @@
 package com.apap.tugas01.controller;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +14,7 @@ import com.apap.tugas01.model.InstansiModel;
 import com.apap.tugas01.model.JabatanModel;
 import com.apap.tugas01.model.JabatanPegawaiModel;
 import com.apap.tugas01.model.PegawaiModel;
+import com.apap.tugas01.model.ProvinsiModel;
 import com.apap.tugas01.service.InstansiService;
 import com.apap.tugas01.service.JabatanPegawaiService;
 import com.apap.tugas01.service.JabatanService;
@@ -62,8 +61,8 @@ public class PegawaiController {
     }
     
 	@RequestMapping(value = "/pegawai/termuda-tertua", method = RequestMethod.GET)
-	private String lihatPegawaiTermudaTertua(@RequestParam("idInstansi") long idInstansi, Model model) {
-		InstansiModel instansi = instansiService.findInstansiById(idInstansi);
+	private String lihatPegawaiTermudaTertua(@RequestParam("idInstansi") BigInteger idInstansi, Model model) {
+		InstansiModel instansi = instansiService.findInstansiById(idInstansi).get();
 		List<PegawaiModel> daftarPegawai = instansi.getPegawaiList();
 		
 		if(daftarPegawai.isEmpty()) {

@@ -1,6 +1,7 @@
 package com.apap.tugas01.service;
 
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,16 +18,16 @@ import com.apap.tugas01.repository.JabatanPegawaiDb;
 
 public class JabatanPegawaiServiceImpl implements JabatanPegawaiService{
 	@Autowired
-	private JabatanPegawaiDb JabatanPegawaiDb;
+	private JabatanPegawaiDb jabatanPegawaiDb;
 	
 	@Override
 	public Optional<List<JabatanPegawaiModel>> findJabatanByPegawaiId(String nip) {
-		return JabatanPegawaiDb.findAllByPegawaiNip(nip);
+		return jabatanPegawaiDb.findAllByPegawaiNip(nip);
 	}
 	
 	@Override
-	public List<JabatanPegawaiModel> findAllByJabatanId(Long id){
-		return JabatanPegawaiDb.findAllByJabatanId(id);
+	public List<JabatanPegawaiModel> findAllByJabatanId(BigInteger id){
+		return jabatanPegawaiDb.findAllByJabatanId(id);
 	}
 	
 	@Override

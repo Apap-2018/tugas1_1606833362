@@ -1,13 +1,15 @@
 package com.apap.tugas01.controller;
 
+import java.math.BigInteger;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jmx.export.annotation.ManagedOperationParameter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.apap.tugas01.model.JabatanModel;
 import com.apap.tugas01.model.JabatanPegawaiModel;
@@ -41,7 +43,7 @@ public class JabatanController {
     }
 
     @RequestMapping(value = "/jabatan/view", method = RequestMethod.GET)
-    private String viewJabatan(@RequestParam(value="idJabatan") Long id, Model model) {
+    private String lihatJabatan(@RequestParam(value="idJabatan") BigInteger id, Model model) {
 		JabatanModel jabatan = JabatanService.findJabatanById(id).get();
 		List<PegawaiModel> allPegawai = PegawaiService.getAllPegawai();
 		int counter = 0;
@@ -53,22 +55,24 @@ public class JabatanController {
 		}
 		model.addAttribute("jabatan", jabatan);
 		model.addAttribute("jumlahPegawai", counter);
+		model.addAttribute("message", "");
         return "view-jabatan";
     }
 
     @RequestMapping(value = "/jabatan/ubah", method = RequestMethod.GET)
-    private String ubahJabatan(@RequestParam(value = "idJabatan") String id_jabatan, Model model){
-        Long id = Long.parseLong(id_jabatan);
+    private String ubahJabatan(@RequestParam(value = "idJabatan") BigInteger id, Model model){
         model.addAttribute("jabatan", JabatanService.findJabatanById(id).get());
+        model.addAttribute("message", "");
         return "ubahJabatan";
     }
 
     @RequestMapping(value = "/jabatan/ubah", method = RequestMethod.POST)
     private String ubahJabatanSubmit(@ModelAttribute JabatanModel jabatan, Model model){
-        Long id = jabatan.getId();
-        JabatanService.updateJabatan(id, jabatan);
+    	BigInteger id = jabatan.getId();
+    	JabatanService.updateJabatan(id, jabatan);
         model.addAttribute("jabatan", jabatan);
-        return "ubahJabatanSuccess";
+		model.addAttribute("message", "Data Jabatan Berhasil Diubah");
+		return "ubahJabatan";
     }
 
     @RequestMapping (value = "/jabatan/hapus", method = RequestMethod.POST)
@@ -80,8 +84,10 @@ public class JabatanController {
             return "hapusJabatanSuccess";
         }
         else {
-            model.addAttribute("jabatan",jabatan);
-            return "hapusJabatanWarning";
+            model.addAttribute("message", "Maaf, jabatan tidak dapat dihapus");
+            model.addAttribute("jabatan", JabatanService.findJabatanById(jabatan.getId()).get());
+            model.addAttribute("jumlahPegawai", list.size());
+            return "view-jabatan";
         }
     }
 
