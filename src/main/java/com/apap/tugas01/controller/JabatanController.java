@@ -68,8 +68,8 @@ public class JabatanController {
 
     @RequestMapping(value = "/jabatan/ubah", method = RequestMethod.POST)
     private String ubahJabatanSubmit(@ModelAttribute JabatanModel jabatan, Model model){
-    	BigInteger id = jabatan.getId();
-    	JabatanService.updateJabatan(id, jabatan);
+    	BigInteger idJabatan = jabatan.getId();
+    	JabatanService.updateJabatan(idJabatan, jabatan);
         model.addAttribute("jabatan", jabatan);
 		model.addAttribute("message", "Data Jabatan Berhasil Diubah");
 		return "ubahJabatan";
@@ -77,8 +77,8 @@ public class JabatanController {
 
     @RequestMapping (value = "/jabatan/hapus", method = RequestMethod.POST)
     private String hapusJabatan(@ModelAttribute JabatanModel jabatan, Model model){
-        List<JabatanPegawaiModel> list = JabatanPegawaiService.findAllByJabatanId(jabatan.getId());
-        if (list.isEmpty()) {
+        List<JabatanPegawaiModel> listPegawai = JabatanPegawaiService.findAllByJabatanId(jabatan.getId());
+        if (listPegawai.isEmpty()) {
             JabatanService.deleteJabatan(jabatan);
             model.addAttribute("jabatan", jabatan);
             return "hapusJabatanSuccess";
@@ -86,7 +86,7 @@ public class JabatanController {
         else {
             model.addAttribute("message", "Maaf, jabatan tidak dapat dihapus");
             model.addAttribute("jabatan", JabatanService.findJabatanById(jabatan.getId()).get());
-            model.addAttribute("jumlahPegawai", list.size());
+            model.addAttribute("jumlahPegawai", listPegawai.size());
             return "view-jabatan";
         }
     }
